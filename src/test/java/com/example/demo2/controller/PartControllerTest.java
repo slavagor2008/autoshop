@@ -82,11 +82,9 @@ public class PartControllerTest {
 
         analogsForPart1.add(part6);
         analogsForPart1.add(part5);
-        analogsForPart1.add(part2);
         analogsForPart1.add(part7);
         analogsForPart1.add(part1);
 
-        analogsForPart2.add(part1);
         analogsForPart2.add(part3);
         analogsForPart2.add(part4);
         analogsForPart2.add(part7);
@@ -108,12 +106,24 @@ public class PartControllerTest {
 
 
     @Test
-    public void find3analogs() {
+    public void find3analogsForPart2() {
 
         System.out.println("");
         System.out.println("************The first three cheapest analogues************");
 
         partController.find3analogs("123").forEach(System.out::println);
+
+        System.out.println("**********************************************************");
+        System.out.println("");
+    }
+
+    @Test
+    public void find3analogsForPart1() {
+
+        System.out.println("");
+        System.out.println("************The first three cheapest analogues************");
+
+        partController.find3analogs("vc1").forEach(System.out::println);
 
         System.out.println("**********************************************************");
         System.out.println("");
