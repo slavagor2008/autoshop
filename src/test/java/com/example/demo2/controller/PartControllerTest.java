@@ -120,7 +120,7 @@ public class PartControllerTest {
     @Test
     public void find3analogsForPart1() {
 
-        System.out.println("");
+        System.out.println("2");
         System.out.println("************The first three cheapest analogues************");
 
         partController.find3analogs("vc1").forEach(System.out::println);
