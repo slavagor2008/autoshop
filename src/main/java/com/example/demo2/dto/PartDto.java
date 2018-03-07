@@ -14,10 +14,6 @@ public class PartDto {
 
     private String vendorCode;
 
-    private long analogId;
-
-    private long kitId;
-
     public Long getId() {
         return id;
     }
@@ -66,25 +62,10 @@ public class PartDto {
         this.id = id;
     }
 
-    public long getAnalogId() {
-        return analogId;
-    }
-
-    public void setAnalogId(long analogId) {
-        this.analogId = analogId;
-    }
-
     public void setVendorCode(String vendorCode) {
         this.vendorCode = vendorCode;
     }
 
-    public long getKitId() {
-        return kitId;
-    }
-
-    public void setKitId(long kitId) {
-        this.kitId = kitId;
-    }
 
     @Override
     public String toString() {

@@ -32,6 +32,9 @@ public class Part implements IPart{
     @ManyToMany(targetEntity=com.example.demo2.entity.Kit.class)
     private List<Kit> kits;
 
+    @OneToMany
+    private List<Storage> storages;
+
     public Part(String name) {
         this.name = name;
     }

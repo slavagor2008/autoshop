@@ -1,26 +1,30 @@
-package com.example.demo2.controller;
+package com.example.demo2;
 
+import com.example.demo2.controller.PartController;
+import com.example.demo2.dto.PartDto;
 import com.example.demo2.entity.Part;
 import com.example.demo2.service.interfaces.PartService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.restassured.RestAssured.get;
-import static org.hamcrest.Matchers.hasItems;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@ComponentScan("com.example.demo2")
 @RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DataJpaTest
-public class PartControllerTest {
+public class RandomPortTestRestTemplateExampleTests {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -80,6 +84,7 @@ public class PartControllerTest {
         part7.setPrice(100.0);
         part7.setVendorCode("v7");
 
+
         analogsForPart1.add(part6);
         analogsForPart1.add(part5);
         analogsForPart1.add(part7);
@@ -104,33 +109,25 @@ public class PartControllerTest {
         entityManager.flush();
     }
 
+//    @Autowired
+//    private TestRestTemplate restTemplate;
+
 //    @Test
-//    public void givenUrl_whenSuccessOnGetsResponseAndJsonHasRequiredKV_thenCorrect() {
-//        get("/part/find3analogs/hw").then().statusCode(200).assertThat()
-//                .body("Hello World"));
+//    public void exampleTest() {
+//        PartDto body = this.restTemplate.getForObject("/part/find3analogs/123", PartDto.class);
+//
+//        assertThat(body).isEqualTo();
 //    }
 
-    @Test
-    public void find3analogsForPart2() {
 
-        System.out.println("");
-        System.out.println("************The first three cheapest analogues************");
-
-        partController.find3analogs("123").forEach(System.out::println);
-
-        System.out.println("**********************************************************");
-        System.out.println("");
-    }
+        @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
-    public void find3analogsForPart1() {
+    public void helloWorldTest() {
+        String body = this.restTemplate.getForObject("/part/find3analogs/hw", String.class);
 
-        System.out.println("2");
-        System.out.println("************The first three cheapest analogues************");
-
-        partController.find3analogs("vc1").forEach(System.out::println);
-
-        System.out.println("**********************************************************");
-        System.out.println("");
+        assertThat(body).isEqualTo("Hello World");
     }
+
 }
