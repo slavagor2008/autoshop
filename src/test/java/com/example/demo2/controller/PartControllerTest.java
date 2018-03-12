@@ -1,13 +1,16 @@
 package com.example.demo2.controller;
 
+import com.example.demo2.dto.PartDto;
 import com.example.demo2.entity.Part;
-import com.example.demo2.service.interfaces.PartService;
+import com.example.demo2.repository.PartRepository;
+import com.example.demo2.service.PartService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -15,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.get;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItems;
 
-@ComponentScan("com.example.demo2")
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class PartControllerTest {
@@ -26,10 +29,7 @@ public class PartControllerTest {
     private TestEntityManager entityManager;
 
     @Autowired
-    private PartController partController;
-
-    @Autowired
-    private PartService partService;
+    private PartRepository partRepository;
 
     private Part part1, part2, part3, part4, part5, part6, part7;
     private List<Part> analogsForPart2 = new ArrayList<Part>();
@@ -104,33 +104,18 @@ public class PartControllerTest {
         entityManager.flush();
     }
 
-//    @Test
-//    public void givenUrl_whenSuccessOnGetsResponseAndJsonHasRequiredKV_thenCorrect() {
-//        get("/part/find3analogs/hw").then().statusCode(200).assertThat()
-//                .body("Hello World"));
-//    }
-
     @Test
-    public void find3analogsForPart2() {
+    public void whenFindById_thenReturnPart() {
+        // given
+        Part part1 = new Part("part1");
+        entityManager.persist(part1);
+        entityManager.flush();
 
-        System.out.println("");
-        System.out.println("************The first three cheapest analogues************");
+        // when
+        Part found = partRepository.findByName(part1.getName());
 
-        partController.find3analogs("123").forEach(System.out::println);
-
-        System.out.println("**********************************************************");
-        System.out.println("");
-    }
-
-    @Test
-    public void find3analogsForPart1() {
-
-        System.out.println("2");
-        System.out.println("************The first three cheapest analogues************");
-
-        partController.find3analogs("vc1").forEach(System.out::println);
-
-        System.out.println("**********************************************************");
-        System.out.println("");
+        // then
+        assertThat(found.getName())
+                .isEqualTo(part1.getName());
     }
 }

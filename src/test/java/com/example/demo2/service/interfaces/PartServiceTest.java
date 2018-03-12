@@ -1,7 +1,7 @@
 package com.example.demo2.service.interfaces;
 
-import com.example.demo2.controller.PartController;
 import com.example.demo2.entity.Part;
+import com.example.demo2.service.PartService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @ComponentScan("com.example.demo2")
 @RunWith(SpringRunner.class)

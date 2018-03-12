@@ -9,4 +9,6 @@ public interface IPartService {
 
     List<PartDto> find3CheapAnalogs(String vendorCode);
 
+    List<Part> getAllParts();
+
 }

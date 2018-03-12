@@ -1,4 +1,4 @@
-package com.example.demo2.service.interfaces;
+package com.example.demo2.service;
 
 
 import com.example.demo2.dto.PartDto;
@@ -6,6 +6,7 @@ import com.example.demo2.entity.Kit;
 import com.example.demo2.entity.Part;
 import com.example.demo2.repository.KitRepository;
 import com.example.demo2.repository.PartRepository;
+import com.example.demo2.service.interfaces.IPartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PartService implements IPartService{
+
+public class PartService implements IPartService {
 
     private final PartRepository partRepository;
     private final KitRepository kitRepository;
@@ -33,6 +35,8 @@ public class PartService implements IPartService{
 
     @Autowired
     private EntityManager entityManager;
+
+
 
     @Override
     public List<PartDto> find3CheapAnalogs(String vendorCode) {
@@ -67,5 +71,10 @@ public class PartService implements IPartService{
         }
 
         return partsDto;
+    }
+
+    @Override
+    public List<Part> getAllParts() {
+        return partRepository.findAll();
     }
 }

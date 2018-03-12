@@ -1,8 +1,6 @@
 package com.example.demo2.repository;
 
-import com.example.demo2.entity.Kit;
 import com.example.demo2.entity.Part;
-import com.example.demo2.service.interfaces.PartService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
